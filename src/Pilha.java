@@ -106,40 +106,44 @@ class CalcRPN {
 	}
 	// interpretador de comandos
 	void exec(String cmd) {
-		if(cmd == "+") {
-			this.mais();
-		}else
-			if(cmd == "-") {
-				this.menos();
-			}else
-				if(cmd == "*") {
-					this.vezes();
-				}else
-					if(cmd == "/") {
-						this.dividido();
-					}else{
-						double cmdDouble = Double.parseDouble(cmd);
-						aPilha.empilha(cmdDouble);
-						Operacao code = new Operacao(cmdDouble);
-						hist.empilha(code);		
-					}if(cmd == "clear") {
-						aPilha.reinicialize();
-						hist.reinicialize();
-					}
-					if(cmd == "hist") {
-						hist.toStringInverse();
-					}
+            switch (cmd){
+                case "+":
+                    this.mais();
+                    break;
+                case "-":
+                    this.menos();
+                    break;
+                case "*":
+                    this.vezes();
+                    break;
+                case "/":
+                    this.dividido();
+                    break;
+                default:
+                    double cmdDouble = Double.parseDouble(cmd);
+                    aPilha.empilha(cmdDouble);
+                    Operacao code = new Operacao(cmdDouble);
+                    hist.empilha(code);		
+                    if("clear".equals(cmd)) {
+                        aPilha.reinicialize();
+                        hist.reinicialize();
+                    }
+                    if("hist".equals(cmd)) {
+                        hist.toStringInverse();
+                    }
+                    break;
+            }
 	}
 	
 	void cancela() {
 		//precisa ajeitar
-        if(hist.topo() == 'e'){
+        if(hist.topo().getCode() == 'e'){
             aPilha.desempilha();
             hist.desempilha();
         }else{
             aPilha.desempilha();
-            aPilha.empilha(hist.topo().b);
-            aPilha.empilha(hist.topo().a);
+            aPilha.empilha(hist.topo().getB());
+            aPilha.empilha(hist.topo().getA());
             hist.desempilha();
 }
 		
@@ -185,4 +189,13 @@ class Operacao{
 		}
 		
 	}
+        public char getCode(){
+            return this.code;
+        }
+        public double getA(){
+            return this.a;
+        }
+        public double getB(){
+            return this.b;
+        }
 }
