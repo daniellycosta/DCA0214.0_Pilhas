@@ -43,11 +43,15 @@ public class Pilha<X>{
 	
 	public String toStringInverse() {
 		Pilha<X> temp = new Pilha<>();
-		//COMPLETAR
-		//percorrer conteudo e ir empilhando em temp;
-		//depois vai desempilhando e imprimindo
-		return null;
-		
+		if(this.estaVazia()) {
+			throw new Error("Pilha vazia");
+		}
+		else {
+			while(!this.estaVazia()) {
+				temp.empilha(this.desempilha());
+			}
+			return temp.toString();
+		}		
 	}
 }
 
