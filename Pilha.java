@@ -106,18 +106,14 @@ public class Pilha<X> {
 }
 
 class CalcRPN {
-    // variaveis da instancia :
-    // uma pilha para os calculos
 
     Pilha<Double> aPilha;
     Pilha<Operacao> hist;
-    // construtor
 
     CalcRPN() {
         aPilha = new Pilha<>();
         hist = new Pilha<>();
     }
-    // Adic~ao de dois elementos do topo da pilha
 
     void mais() {
         Double a = aPilha.desempilha();
@@ -127,7 +123,6 @@ class CalcRPN {
         Operacao code = new Operacao('+', a, b);
         hist.empilha(code);
     }
-    // Subtrac~ao de dois elementos do topo da pilha
 
     void menos() {
         Double a = aPilha.desempilha();
@@ -138,7 +133,6 @@ class CalcRPN {
         Operacao code = new Operacao('-', a, b);
         hist.empilha(code);
     }
-    // Multiplicac~ao de dois elementos do topo da pilha
 
     void vezes() {
         Double a = aPilha.desempilha();
@@ -149,7 +143,6 @@ class CalcRPN {
         Operacao code = new Operacao('*', a, b);
         hist.empilha(code);
     }
-    // Divis~ao de dois elementos no topo da pilha
 
     void dividido() {
         Double a = aPilha.desempilha();
@@ -160,12 +153,10 @@ class CalcRPN {
         Operacao code = new Operacao('/', a, b);
         hist.empilha(code);
     }
-    // retorna o conteudo do topo da pilha
 
     Double resultado() {
         return aPilha.topo();
     }
-    // interpretador de comandos
 
     void exec(String cmd) {
 
@@ -193,7 +184,6 @@ class CalcRPN {
     }
 
     void cancela() {
-        //precisa ajeitar
         if (hist.topo().getCode() == 'e') {
             aPilha.desempilha();
             hist.desempilha();
